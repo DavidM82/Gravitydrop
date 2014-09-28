@@ -30,7 +30,8 @@ def Interface():
         
         if b == 1:
             #This moves to another function that runs the actual 'simulation', in theory.
-            print "No."
+            Energy = ImpactEnergy(Man,Box)
+            print Energy
 
         if b == 2:
             #This moves to a function that changes the unit system shown in the simulation and new items.
@@ -102,5 +103,13 @@ def Master():
 #Constants
 g = 9.81 #gravitation acceleration [m/s^2]
 
+def ImpactEngergy(falling, notfalling):
+    #This function calculates the amount of kinetic energy the falling object has just before impact
+    #This function uses the mass of the falling object and the height of the notfalling office
+    h= notfalling.height #[m]
+    m= falling.mass      #[kg]
+
+    Energy = m*g*h       #[J]
+    return Energy
 
 Master()
