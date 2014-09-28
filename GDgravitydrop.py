@@ -31,7 +31,9 @@ def Interface():
         if b == 1:
             #This moves to another function that runs the actual 'simulation', in theory.
             Energy = ImpactEnergy(Man,Box)
-            print Energy
+            Time = ImpactTime(Man, Box)
+            print "It took "  + str(Time) + " seconds to hit the ground."
+            print "A total of " + str(Energy) + " Joules were released."
 
         if b == 2:
             #This moves to a function that changes the unit system shown in the simulation and new items.
@@ -110,6 +112,18 @@ def ImpactEnergy(falling, notfalling):
     Energy = m*g*h       #[J]
     return Energy
 
+def ImpactTime(falling, notfalling):
+    #This function measures the time it takes the falling object to hit the ground.
+    #Inputs: falling (item), nonfalling (item)
+    #Return: Time (int)
+
+    # The equation used for this is Velcoity (final) / acceleration = time (seconds)
+    # Velcoity is obtained by getting the square root of 2*acceleration*height of nonfalling
+
+    g = 9.8
+    Vel = (2*g*notfalling.height)**.5
+    Time = Vel / g
+    return Time
 
 def Master():
     "Runs all the other functions in this program."
