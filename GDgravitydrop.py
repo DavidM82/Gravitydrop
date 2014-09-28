@@ -95,21 +95,25 @@ def Interface():
             print items[1].name
 
 
-def Master():
-    "Runs all the other functions in this program."
-    Intro()
-    Interface()
-
 #Constants
 g = 9.81 #gravitation acceleration [m/s^2]
 
-def ImpactEngergy(falling, notfalling):
+def ImpactEnergy(falling, notfalling):
     #This function calculates the amount of kinetic energy the falling object has just before impact
-    #This function uses the mass of the falling object and the height of the notfalling office
+    #This function uses the mass of the falling object and the height of the notfalling object.
+    #Inputs: falling (item), nonfalling (item)
+    #Return: Energy (int)
+    
     h= notfalling.height #[m]
     m= falling.mass      #[kg]
 
     Energy = m*g*h       #[J]
     return Energy
+
+
+def Master():
+    "Runs all the other functions in this program."
+    Intro()
+    Interface()
 
 Master()
