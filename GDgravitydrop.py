@@ -9,7 +9,7 @@ from GDitems import *
 
 def Intro():
     #Introduces the user to this program, explains what to do.
-    print "This program is designed to find the amount of energy by an object just before it hits the ground."
+    print "This program is designed to find the amount of energy an object has right before hitting the ground when dropped from another object."
 
 def Interface():
     #This program provides the options the user can do.
@@ -34,15 +34,15 @@ def Interface():
 
         if b == 2:
             #This moves to a function that changes the unit system shown in the simulation and new items.
-            print "I lied, you don't get to change it."
+            print "I lied, you don't get to change it. Metric for life!"
 
         if b == 3:
             #This calls the itemMaker() and adds it to the database.
             print "In order to make an item, it needs three things, name, mass and height."
             print "Type each on seperate lines."
             na = raw_input("Name (string): ")
-            ma = input("Mass (integer):")
-            he = input("Height (integer): ")
+            ma = input("Mass (integer) [m]: ")
+            he = input("Height (integer) [kg]: ")
             ni = itemMaker(na,ma,he)
             items.append(ni)
             print ""
@@ -98,6 +98,9 @@ def Master():
     "Runs all the other functions in this program."
     Intro()
     Interface()
+
+#Constants
+g = 9.81 #gravitation acceleration [m/s^2]
 
 
 Master()
