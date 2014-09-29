@@ -121,13 +121,14 @@ def Simulation():
     falling_input = falling_input.lower
     
     falling_in_items = False
-    while falling_in_items == False:
-        if falling_input not in items:
-            print "That item is not presently in the system"
-            falling_input = raw_input()
-        else:
+    for i in items:
+        if i.name == falling_input:
             falling = items[falling_input]
-            falling_in_items = True
+            falling_in_items = True        
+
+    if falling_in_items == False:
+        print "That item is not presently in the system"
+            
 
     print "What would you like to drop it from?"
     #I'd like this print statement to include the falling object name
@@ -175,7 +176,7 @@ def ImpactTime(falling, notfalling):
     g = 9.81
 
     Vel = (2*g*notfalling.height)**.5
-    Time = Vel / g
+    Time = notfalling.height/Vel
     return Time
 
 def Master():
