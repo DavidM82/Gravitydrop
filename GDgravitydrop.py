@@ -30,7 +30,32 @@ def Interface():
         
         if b == 1:
             #This moves to another function that runs the actual 'simulation', in theory.
-            Energy = ImpactEnergy(Man,Box)
+            print "What would you like to drop?"
+            falling_input = raw_input()
+            falling_input = falling_input.lower
+            falling_in_items = False
+            while falling_in_items == False:
+                if falling_input not in items:
+                    print "That item is not presently in the system"
+                    falling_input = raw_input()
+                else:
+                    falling = items[falling_input]
+                    falling_in_items = True
+
+            print "What would you like to drop it from?" #I'd like this print statement to inlclude the falling object name
+            notfalling_input = raw_input()
+            notfalling_input = notfalling_input.lower
+            notfalling_in_items = False
+            while not_falling_in_items == False:
+                if notfalling_input not in items:
+                    print "That item is not presently in the system"
+                    notfalling_input = raw_input()
+                else:
+                    notfalling = items[notfalling_input]
+                    notfalling_in_items = True
+
+            
+            Energy = ImpactEnergy(falling,notfalling)
             print Energy
 
         if b == 2:
