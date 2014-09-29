@@ -39,8 +39,8 @@ def itemMaker(name, mass, height):
 
 #But for now, it's a list of items.
 
-box = item("box", 4, 2)
-man = item("man", 10, 2)
-cat = item("cat", 2, 1)
+box = item("box", .450, .3048)
+man = item("man", 78.5, 1.776)
+cat = item("cat", 4.5, .23)
 
 items = [box, man, cat]

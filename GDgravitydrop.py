@@ -53,8 +53,8 @@ def Interface():
             if checker == False:
                 pass
             else:
-                ma = input("Mass (integer) [m]: ")
-                he = input("Height (integer) [kg]: ")
+                ma = input("Mass (integer) [kg]: ")
+                he = input("Height (integer) [m]: ")
                 ni = itemMaker(na,ma,he)
                 items.append(ni)
                 print ""
@@ -115,6 +115,7 @@ def Simulation():
     print "List of items:"
     for i in items:
         print i.name
+    print ""
         
     print "What would you like to drop?"
     
@@ -132,7 +133,7 @@ def Simulation():
             
             
 
-    print "What would you like to drop it from?"
+    print "What would you like to drop the " + falling.name + " from?"
     #I'd like this print statement to include the falling object name
     notfalling_in_items = False
     while notfalling_in_items == False:
@@ -148,6 +149,7 @@ def Simulation():
 
     Energy = ImpactEnergy(falling,notfalling)
     Time = ImpactTime(falling, notfalling)
+    print "You are dropping a " + falling.name + " from a " + notfalling.name
     print "It took "  + str(Time) + " seconds to hit the ground."
     print "A total of " + str(Energy) + " Joules were released."
 
