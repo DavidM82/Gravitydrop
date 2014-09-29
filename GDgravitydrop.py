@@ -38,27 +38,39 @@ def Interface():
 
         if b == 3:
             #This calls the itemMaker() and adds it to the database.
+            print""
+            print "Type 'menu' at any point to stop and return to menu."
+            print ""
             print "In order to make an item, it needs three things, name, mass and height."
-
             print "Type each on seperate lines."
+            
             na = raw_input("Name (string): ")
             #Checks that it doesn't already use a name in the database. If it does, returns to menu.
             checker = True
+            ba = na.lower().strip().replace(" ", "")
             for i in items:
-                i = i.name
-                if na == i:
+                i = i.callname
+                if ba == i:
                     print "That name is already being used."
                     checker = False
 
             if checker == False:
                 pass
+            if ba == 'menu':
+                pass
             else:
-                ma = input("Mass (integer) [kg]: ")
-                he = input("Height (integer) [m]: ")
-                ni = itemMaker(na,ma,he)
-                items.append(ni)
-                print ""
-                print "Item has been added."
+                ma = raw_input("Mass (integer) [kg]: ")
+                if ma == 'menu':
+                    pass
+                else:
+                    he = raw_input("Height (integer) [m]: ")
+                    if he == 'menu':
+                        pass
+                    else:
+                        ni = itemMaker(na,ma,he)
+                        items.append(ni)
+                        print ""
+                        print "Item has been added."
 
         if b == 4:
             #This changes the pre-existing constants in the simulation.
@@ -67,8 +79,11 @@ def Interface():
         if b == 5:
             #This prints out the name of every item in the database with an option of going into any item's stats.
 
+            counter = 1
             for i in items:
-                print i.name
+                print "[" + str(counter) + "]" + i.name
+                counter = counter + 1
+                
             data = True
             while data == True:
                 print ""
@@ -81,14 +96,14 @@ def Interface():
                         
                 elif datainput == "2":
                     print ""
-                    print "Type the position it appears in the list, with the topmost being 1."
+                    print "Type its position in the list."
                     n = input("")
                     n = n-1
                     
                     print ""
                     print "Name: " + items[n].name
-                    print "Mass: " + str(items[n].mass)
-                    print "Height: " + str(items[n].height)
+                    print "Mass: " + str(items[n].mass) + " kilograms"
+                    print "Height: " + str(items[n].height) + " meters"
                 
                 elif datainput == "3":
                     data = False
@@ -103,7 +118,7 @@ def Interface():
             
         if b == 7:
             #Prints the first item's name in the list, to show that variables carry over between programs.
-            print items[1].name
+            print items[0].name
 
 
 def Simulation():
@@ -116,15 +131,21 @@ def Simulation():
     for i in items:
         print i.name
     print ""
-        
+
+    print "Type 'menu' to stop at any point and return to menu."        
     print "What would you like to drop?"
     
     falling_in_items = False
     while falling_in_items == False:
         falling_input = str(raw_input())
-        falling_input = falling_input.lower()
+        #Converts the input to the callname syntax. This makes it so that I can call up the cat item by typing Cat, CAT, c at, C A T and of course, cat.
+        falling_input = falling_input.lower().strip().replace(" ","")
+
+        if falling_input == 'menu':
+            return None
+
         for i in items:
-            if falling_input == i.name:
+            if falling_input == i.callname:
                 falling = i
                 falling_in_items = True        
 
@@ -138,9 +159,13 @@ def Simulation():
     notfalling_in_items = False
     while notfalling_in_items == False:
         notfalling_input = str(raw_input())
-        notfalling_input = notfalling_input.lower()
+        notfalling_input = notfalling_input.lower().strip().replace(" ", "")
+
+        if notfalling_input == 'menu':
+            return None
+            
         for i in items:
-            if i.name == notfalling_input:
+            if notfalling_input == i.callname:
                 notfalling = i
                 notfalling_in_items = True        
 
@@ -149,13 +174,14 @@ def Simulation():
 
     Energy = ImpactEnergy(falling,notfalling)
     Time = ImpactTime(falling, notfalling)
+    print ""
     print "You are dropping a " + falling.name + " from a " + notfalling.name
     print "It took "  + str(Time) + " seconds to hit the ground."
     print "A total of " + str(Energy) + " Joules were released."
 
 
 #Constants
-g = 9.81 #gravitation acceleration [m/s^2]
+g = 9.81 #gravitationial acceleration [m/s^2]
 
 def ImpactEnergy(falling, notfalling):
     #This function calculates the amount of kinetic energy the falling object has just before impact
@@ -163,7 +189,6 @@ def ImpactEnergy(falling, notfalling):
     #Inputs: falling (item), nonfalling (item)
     #Return: Energy (int)
 
-    g = 9.81
     h= notfalling.height #[m]
     m= falling.mass      #[kg]
 
@@ -177,7 +202,6 @@ def ImpactTime(falling, notfalling):
 
     # The equation used for this is Velcoity (final) / acceleration = time (seconds)
     # Velcoity is obtained by getting the square root of 2*acceleration*height of nonfalling
-    g = 9.81
 
     Vel = (2*g*notfalling.height)**.5
     Time = notfalling.height/Vel
