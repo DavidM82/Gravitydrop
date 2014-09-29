@@ -30,11 +30,8 @@ def Interface():
         
         if b == 1:
             #This moves to another function that runs the actual 'simulation', in theory.
-            Energy = ImpactEnergy(Man,Box)
-            Time = ImpactTime(Man, Box)
-            print "It took "  + str(Time) + " seconds to hit the ground."
-            print "A total of " + str(Energy) + " Joules were released."
-
+            Simulation()
+            
         if b == 2:
             #This moves to a function that changes the unit system shown in the simulation and new items.
             print "I lied, you don't get to change it. Metric for life!"
@@ -42,14 +39,26 @@ def Interface():
         if b == 3:
             #This calls the itemMaker() and adds it to the database.
             print "In order to make an item, it needs three things, name, mass and height."
+
             print "Type each on seperate lines."
             na = raw_input("Name (string): ")
-            ma = input("Mass (integer) [m]: ")
-            he = input("Height (integer) [kg]: ")
-            ni = itemMaker(na,ma,he)
-            items.append(ni)
-            print ""
-            print "Item has been added."
+            #Checks that it doesn't already use a name in the database. If it does, returns to menu.
+            checker = True
+            for i in items:
+                i = i.name
+                if na == i:
+                    print "That name is already being used."
+                    checker = False
+
+            if checker == False:
+                pass
+            else:
+                ma = input("Mass (integer) [m]: ")
+                he = input("Height (integer) [kg]: ")
+                ni = itemMaker(na,ma,he)
+                items.append(ni)
+                print ""
+                print "Item has been added."
 
         if b == 4:
             #This changes the pre-existing constants in the simulation.
@@ -78,8 +87,8 @@ def Interface():
                     
                     print ""
                     print "Name: " + items[n].name
-                    print "Mass: " + items[n].mass
-                    print "Height: " + items[n].height
+                    print "Mass: " + str(items[n].mass)
+                    print "Height: " + str(items[n].height)
                 
                 elif datainput == "3":
                     data = False
@@ -97,6 +106,49 @@ def Interface():
             print items[1].name
 
 
+def Simulation():
+    #This program runs the actual simulation.
+    #Inputs: None
+    #Return: Two print statements.
+
+    #Prints out the list.
+    print "List of items:"
+    for i in items:
+        print i.name
+        
+    print "What would you like to drop?"
+    falling_input = raw_input()
+    falling_input = falling_input.lower
+    
+    falling_in_items = False
+    while falling_in_items == False:
+        if falling_input not in items:
+            print "That item is not presently in the system"
+            falling_input = raw_input()
+        else:
+            falling = items[falling_input]
+            falling_in_items = True
+
+    print "What would you like to drop it from?"
+    #I'd like this print statement to include the falling object name
+    notfalling_input = raw_input()
+    notfalling_input = notfalling_input.lower
+    notfalling_in_items = False
+    
+    while not_falling_in_items == False:
+        if notfalling_input not in items:
+            print "That item is not presently in the system"
+            notfalling_input = raw_input()
+        else:
+            notfalling = items[notfalling_input]
+            notfalling_in_items = True
+
+    Energy = ImpactEnergy(falling,notfalling)
+    Time = ImpactTime(falling, notfalling)
+    print "It took "  + str(Time) + " seconds to hit the ground."
+    print "A total of " + str(Energy) + " Joules were released."
+
+
 #Constants
 g = 9.81 #gravitation acceleration [m/s^2]
 
@@ -105,7 +157,8 @@ def ImpactEnergy(falling, notfalling):
     #This function uses the mass of the falling object and the height of the notfalling object.
     #Inputs: falling (item), nonfalling (item)
     #Return: Energy (int)
-    
+
+    g = 9.81
     h= notfalling.height #[m]
     m= falling.mass      #[kg]
 
@@ -119,8 +172,8 @@ def ImpactTime(falling, notfalling):
 
     # The equation used for this is Velcoity (final) / acceleration = time (seconds)
     # Velcoity is obtained by getting the square root of 2*acceleration*height of nonfalling
+    g = 9.81
 
-    g = 9.8
     Vel = (2*g*notfalling.height)**.5
     Time = Vel / g
     return Time
