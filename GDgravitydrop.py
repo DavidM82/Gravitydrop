@@ -117,32 +117,34 @@ def Simulation():
         print i.name
         
     print "What would you like to drop?"
-    falling_input = raw_input()
-    falling_input = falling_input.lower
     
     falling_in_items = False
-    for i in items:
-        if i.name == falling_input:
-            falling = items[falling_input]
-            falling_in_items = True        
+    while falling_in_items == False:
+        falling_input = str(raw_input())
+        falling_input = falling_input.lower()
+        for i in items:
+            if falling_input == i.name:
+                falling = i
+                falling_in_items = True        
 
-    if falling_in_items == False:
-        print "That item is not presently in the system"
+        if falling_in_items == False:
+            print "That item is not presently in the system, please enter another item"
+            
             
 
     print "What would you like to drop it from?"
     #I'd like this print statement to include the falling object name
-    notfalling_input = raw_input()
-    notfalling_input = notfalling_input.lower
     notfalling_in_items = False
-    
-    while not_falling_in_items == False:
-        if notfalling_input not in items:
-            print "That item is not presently in the system"
-            notfalling_input = raw_input()
-        else:
-            notfalling = items[notfalling_input]
-            notfalling_in_items = True
+    while notfalling_in_items == False:
+        notfalling_input = str(raw_input())
+        notfalling_input = notfalling_input.lower()
+        for i in items:
+            if i.name == notfalling_input:
+                notfalling = i
+                notfalling_in_items = True        
+
+        if notfalling_in_items == False:
+            print "That item is not presently in the system, please enter another item"
 
     Energy = ImpactEnergy(falling,notfalling)
     Time = ImpactTime(falling, notfalling)
