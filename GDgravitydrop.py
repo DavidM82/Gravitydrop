@@ -17,9 +17,9 @@ def Interface():
     #This checks to see if new items were added during the session.
     changed = False
     
-    a = True;    
+    mainloop = True;    
     #This is run as a loop until a becomes false.
-    while  a == True:
+    while  mainloop == True:
         print ""
         print "What would you like to do now?"
         print "[1] Run program"
@@ -92,7 +92,7 @@ def Interface():
             data = True
             while data == True:
                 print ""
-                print "Type [1] to see all items again, [2] to select an item and view its data, [3] To change an item or [4] to return to menu."
+                print "Type [1] to see all items again, [2] to select an item and view its data,       [3] To change an item or [4] to return to menu."
                 datainput = raw_input("")
                 
                 if datainput == "1":
@@ -127,7 +127,49 @@ def Interface():
                         #Modifying an item.
                             print "Select the number of the item."
                             inception = True
-                            #while inception == True:
+                            while inception == True:
+                                a = raw_input("")
+                                a = int(a)-1
+                                if a > 0 and a <= len(items)-1:
+                                    print "You have chosen the " + items[a].name + " item, is this what you wanted?"
+                                    print "[Yes], [No], [menu] "
+                                    sooperdeep = True
+                                    while sooperdeep == True:
+                                        b = raw_input("")
+                                        
+                                        if b == 'yes':
+                                            a = items[a]
+                                            print a.name
+                                            print str(a.mass)
+                                            print str(a.height)
+                                            print ""
+                                            print "Now type your changes."
+                                            newname = raw_input('Name: ')
+                                            a.name = newname
+                                            newmass = raw_input('Mass [kg]: ')
+                                            a.mass = float(newmass)
+                                            newheight = raw_input('Height [m]: ')
+                                            a.height = float(newheight)
+
+                                            changed = True
+                                            print "Item has been changed."
+                                            sooperdeep = False
+                                            inception = False
+                                            datainput3 = False
+                                            
+                                        elif b == 'no':
+                                            print 'Select another item.'
+                                            sooperdeep = False
+                                            
+                                        elif b == 'menu':
+                                            sooperdeep = False
+                                            inception = False
+                                            datainput3 = False
+                                            
+                                        else:
+                                            print "Not a valid answer, please try again."
+                                else:
+                                    print "Not within the database or no items in database, try another number or type menu to return to main menu."
 
                         elif n == "d":
                         #Deleting an item.
@@ -135,22 +177,22 @@ def Interface():
                             inception = True
                             while inception == True:
                                 a = raw_input("")
-                                a = int(a)
-                                if a <= len(items):
+                                a = int(a)-1
+                                if a > 0 and a <= len(items)-1:
                                     print "Are you sure you want to remove " + items[a].name + " from the database?"
                                     print "If so, type the name of the item, otherwise type 'menu' to return to main menu."
                                     sodeep = True
                                     while sodeep == True:
                                         n = raw_input("")
-                                        n.lower().strip()
+                                        n = n.lower().strip()
                                         if n == "menu":
                                             sodeep = False
                                             inception = False
                                             datainput3 = False
 
                                         elif n == items[a].callname:
-                                            items.remove(a)
                                             print items[a].name + " has been removed."
+                                            items.remove(items[a])
                                             changed = True
                                             sodeep = False
                                             inception = False
@@ -159,7 +201,8 @@ def Interface():
                                         else:
                                             print "Not a valid answer, please type the name of the item, or menu."
                                             print ""
-            
+                                else:
+                                    print "Not within the database or no items in database, try another number or type menu to return to main menu."
 
                         else:
                             print ""
@@ -195,11 +238,7 @@ def Interface():
                         print "Not a valid answer, please type [Yes] or [No]."
 
             print "Exiting gravitydrop.py... "
-            a = False
-            
-        if b == 8:
-            #Prints the first item's name in the list, to show that variables carry over between programs.
-            print items[0].name
+            mainloop = False
 
 
 def Simulation():
