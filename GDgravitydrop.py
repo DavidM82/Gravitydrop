@@ -71,6 +71,7 @@ def Interface():
                     if he == 'menu':
                         pass
                     else:
+                        na = na.replace(" ", "")
                         ni = itemMaker(na,float(ma),float(he))
                         items.append(ni)
                         changed = True
@@ -117,7 +118,7 @@ def Interface():
                     datainput3 = True
                     while datainput3 == True:
                         n = raw_input("")
-                        n = n.lower().strip()
+                        n = n.lower().replace(" ","")
 
                         if n == "menu":
                         # Returning to previous menu
@@ -145,7 +146,7 @@ def Interface():
                                             print ""
                                             print "Now type your changes."
                                             newname = raw_input('Name: ')
-                                            a.name = newname
+                                            a.name = newname.replace(" ", "")
                                             newmass = raw_input('Mass [kg]: ')
                                             a.mass = float(newmass)
                                             newheight = raw_input('Height [m]: ')
