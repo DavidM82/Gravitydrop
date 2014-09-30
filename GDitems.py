@@ -35,16 +35,22 @@ def itemMaker(name, mass, height):
 
     return newitem
 
-#The database is displayed as a dictionary with item.name used as keys
+#The items is a list of items read off a file called GDdatabase.txt. It's important that the file exists, even if it's blank.
+items = []
 
-#The database adds the items in the database.
+#This takes all the words out of the file and puts it into a list.
+data = open('GDdatabase.txt', 'r')
+allwords = data.read()
+eachword = allwords.split()
+data.close()
 
-
-#But for now, it's a list of items.
-
-box = itemMaker("Box", .450, .3048)
-man = itemMaker("Man", 78.5, 1.776)
-cat = itemMaker("Cat", 4.5, .23)
-
-items = [box, man, cat]
-
+#This for loop scans each word to see if it matches 'Item', if it does it takes the next three words and puts it into an item (item) and adds it to items (List)
+pointer = 0
+for i in eachword:
+    if i == 'Item':
+        a = eachword[pointer+1]
+        b = eachword[pointer+2]
+        c = eachword[pointer+3]
+        new = itemMaker(a,b,c)
+        items.append(new)
+    pointer = pointer + 1

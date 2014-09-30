@@ -13,6 +13,9 @@ def Intro():
 
 def Interface():
     #This program provides the options the user can do.
+
+    #This checks to see if new items were added during the session.
+    changed = False
     
     a = True;    
     #This is run as a loop until a becomes false.
@@ -69,6 +72,7 @@ def Interface():
                     else:
                         ni = itemMaker(na,ma,he)
                         items.append(ni)
+                        changed = True
                         print ""
                         print "Item has been added."
 
@@ -112,7 +116,23 @@ def Interface():
                     print "Not a valid input, try again."
         
         if b == 6:
-            #This exits the program.
+            #This exits the program but if user wants to save changes, goes to Savefile().
+            if changed == True:
+                print "Database has changed, would you like to save changes? [Yes] or [No]"
+
+                exiting = False
+                while exiting == False:
+                    save = raw_input("")
+                    save = save.strip().lower()
+                    if  save == "no":
+                        exiting = True
+                        pass
+                    elif save == "yes":
+                        SaveFile()
+                        exiting = True
+                    else:
+                        print "Not a valid answer, please type [Yes] or [No]."
+
             print "Exiting gravitydrop.py... "
             a = False
             
@@ -179,8 +199,21 @@ def Simulation():
     print "It took "  + str(Time) + " seconds to hit the ground."
     print "A total of " + str(Energy) + " Joules were released."
 
+def SaveFile():
+    #This saves the database, keeping changes for future sessions.
+    data = open('GDdatabase.txt', 'w')
 
-#Constants
+    for i in items:
+        data.write("Item ")
+        data.write(i.name + " ")
+        data.write(str(i.mass) + " ")
+        data.write(str(i.height) + " ")
+    
+    print "Database has been saved."
+    print ""
+
+
+#Constants and physics functions to run the equations used in Simulation()
 g = 9.81 #gravitationial acceleration [m/s^2]
 
 def ImpactEnergy(falling, notfalling):
@@ -206,6 +239,7 @@ def ImpactTime(falling, notfalling):
     Vel = (2*g*notfalling.height)**.5
     Time = notfalling.height/Vel
     return Time
+
 
 def Master():
     "Runs all the other functions in this program."
