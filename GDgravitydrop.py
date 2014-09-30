@@ -175,9 +175,7 @@ def Simulation():
 
         if falling_in_items == False:
             print "That item is not presently in the system, please enter another item"
-            
-            
-
+                    
     print "What would you like to drop the " + falling.name + " from?"
     #I'd like this print statement to include the falling object name
     notfalling_in_items = False
@@ -198,10 +196,16 @@ def Simulation():
 
     Energy = ImpactEnergy(falling,notfalling)
     Time = ImpactTime(falling, notfalling)
+
     print ""
     print "You are dropping a " + falling.name + " from a " + notfalling.name
     print "It took "  + str(Time) + " seconds to hit the ground."
-    print "A total of " + str(Energy) + " Joules were released."
+    if Energy <= 9999:
+        print "A total of " + str(Energy) + "J were released."
+    elif Energy > 9999 and Energy<= 9999999:
+        print "A total of " + str(Energy/(10**3)) + "kJ were released."
+    elif Energy > 9999999:
+        print "A total of " + str(Energy/(10**6)) + "MJ were released."
 
 def SaveFile():
     #This saves the database, keeping changes for future sessions.
