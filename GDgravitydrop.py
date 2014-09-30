@@ -26,7 +26,7 @@ def Interface():
         print "[2] Change unit system"
         print "[3] Make new item"
         print "[4] Change constants"
-        print "[5] Show all items in database"
+        print "[5] Go to Database"
         print "[6] Show Disclaimer"
         print "[7] Exit program "
         b = input("")
@@ -92,7 +92,7 @@ def Interface():
             data = True
             while data == True:
                 print ""
-                print "Type [1] to see all items again, [2] to select an item and view its data, or [3] to return to menu."
+                print "Type [1] to see all items again, [2] to select an item and view its data, [3] To change an item or [4] to return to menu."
                 datainput = raw_input("")
                 
                 if datainput == "1":
@@ -109,8 +109,64 @@ def Interface():
                     print "Name: " + items[n].name
                     print "Mass: " + str(items[n].mass) + " kilograms"
                     print "Height: " + str(items[n].height) + " meters"
-                
+
                 elif datainput == "3":
+                    print ""
+                    print "Would you like to [M]odify an item or [D]elete an item?"
+                    
+                    datainput3 = True
+                    while datainput3 == True:
+                        n = raw_input("")
+                        n = n.lower().strip()
+
+                        if n == "menu":
+                        # Returning to previous menu
+                            datainput3 = False
+
+                        elif n == "m":
+                        #Modifying an item.
+                            print "Select the number of the item."
+                            inception = True
+                            #while inception == True:
+
+                        elif n == "d":
+                        #Deleting an item.
+                            print "Select the number of the item."
+                            inception = True
+                            while inception == True:
+                                a = raw_input("")
+                                a = int(a)
+                                if a <= len(items):
+                                    print "Are you sure you want to remove " + items[a].name + " from the database?"
+                                    print "If so, type the name of the item, otherwise type 'menu' to return to main menu."
+                                    sodeep = True
+                                    while sodeep == True:
+                                        n = raw_input("")
+                                        n.lower().strip()
+                                        if n == "menu":
+                                            sodeep = False
+                                            inception = False
+                                            datainput3 = False
+
+                                        elif n == items[a].callname:
+                                            items.remove(a)
+                                            print items[a].name + " has been removed."
+                                            changed = True
+                                            sodeep = False
+                                            inception = False
+                                            datainput3 = False
+
+                                        else:
+                                            print "Not a valid answer, please type the name of the item, or menu."
+                                            print ""
+            
+
+                        else:
+                            print ""
+                            print "Not a valid answer, try again."
+        
+                
+                elif datainput == "4":
                     data = False
                     
                 else:
