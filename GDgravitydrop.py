@@ -203,7 +203,7 @@ def Simulation():
     print "It took "  + str(Time) + " seconds to hit the ground."
     if Energy < 1:
         print "A total of " + str(Energy//(10**-3)) + " mJ were released." 
-    elif Energy >= 0 and Energy < 1000:
+    elif Energy >= 1 and Energy < 1000:
         print "A total of " + str(Energy) + " J were released."
     elif Energy >= 1000 and Energy < 1000000:
         print "A total of " + str(Energy/(10**3)) + " kJ were released."
