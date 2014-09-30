@@ -27,7 +27,8 @@ def Interface():
         print "[3] Make new item"
         print "[4] Change constants"
         print "[5] Show all items in database"
-        print "[6] Exit program "
+        print "[6] Show Disclaimer"
+        print "[7] Exit program "
         b = input("")
         print ""
         
@@ -114,8 +115,11 @@ def Interface():
                     
                 else:
                     print "Not a valid input, try again."
-        
+
         if b == 6:
+            print disclaimer
+        
+        if b == 7:
             #This exits the program but if user wants to save changes, goes to Savefile().
             if changed == True:
                 print "Database has changed, would you like to save changes? [Yes] or [No]"
@@ -136,7 +140,7 @@ def Interface():
             print "Exiting gravitydrop.py... "
             a = False
             
-        if b == 7:
+        if b == 8:
             #Prints the first item's name in the list, to show that variables carry over between programs.
             print items[0].name
 
@@ -215,6 +219,12 @@ def SaveFile():
 
 #Constants and physics functions to run the equations used in Simulation()
 g = 9.81 #gravitationial acceleration [m/s^2]
+
+d1 = "Disclaimer: this program was developed my an inexperienced mechanical engineer and his"
+d2 = "undeclared but CS focused friend. This program does not account for air resistance or changes Earth's"
+d3 = "gravitational field. All pre-set data came from Google The data obtain form this program should not be"
+d4 = "used in any serious applicaiton."
+disclaimer =d1+d2+d3+d4
 
 def ImpactEnergy(falling, notfalling):
     #This function calculates the amount of kinetic energy the falling object has just before impact
