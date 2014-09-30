@@ -117,7 +117,8 @@ def Interface():
                     print "Not a valid input, try again."
 
         if b == 6:
-            print disclaimer
+            #Where the author attempts to show his skills at making a mult-line print statement.
+            disclaimer()
         
         if b == 7:
             #This exits the program but if user wants to save changes, goes to Savefile().
@@ -200,12 +201,29 @@ def Simulation():
     print ""
     print "You are dropping a " + falling.name + " from a " + notfalling.name
     print "It took "  + str(Time) + " seconds to hit the ground."
-    if Energy <= 9999:
-        print "A total of " + str(Energy) + "J were released."
-    elif Energy > 9999 and Energy<= 9999999:
-        print "A total of " + str(Energy/(10**3)) + "kJ were released."
-    elif Energy > 9999999:
-        print "A total of " + str(Energy/(10**6)) + "MJ were released."
+    if Energy < 0:
+        print "A total of " + str(Energy//(10**-3)) + " mJ were released." 
+    elif Energy >= 0 and Energy < 1000:
+        print "A total of " + str(Energy) + " J were released."
+    elif Energy >= 1000 and Energy < 1000000:
+        print "A total of " + str(Energy/(10**3)) + " kJ were released."
+    else:
+        print "A total of " + str(Energy/(10**6)) + " MJ were released."
+
+
+def disclaimer():
+    #A very important warning to all those who might take this simulator seriously. Formatted to fit the default console screen.
+    d1 = "Disclaimer: this program was developed my an inexperienced mechanical engineer  and his programmer friend."
+    d2 = "This program does not account for air resistance or changes Earth's             gravitational field. (yet) "
+    d3 = "All pre-set data came from Google. The data obtained from this program should   not be used in any serious application."
+    d4 = "All experiments performed with this simulation's data should be videotaped and  uploaded to YouTube as quickly as possible."
+    d5 = "This is the end of the disclaimer, it will cease to disclaim at the end of this sentence."
+    
+    print d1
+    print d2
+    print d3
+    print d4
+    print d5
 
 def SaveFile():
     #This saves the database, keeping changes for future sessions.
@@ -223,12 +241,6 @@ def SaveFile():
 
 #Constants and physics functions to run the equations used in Simulation()
 g = 9.81 #gravitationial acceleration [m/s^2]
-
-d1 = "Disclaimer: this program was developed my an inexperienced mechanical engineer and his"
-d2 = "undeclared but CS focused friend. This program does not account for air resistance or changes Earth's"
-d3 = "gravitational field. All pre-set data came from Google The data obtain form this program should not be"
-d4 = "used in any serious applicaiton."
-disclaimer =d1+d2+d3+d4
 
 def ImpactEnergy(falling, notfalling):
     #This function calculates the amount of kinetic energy the falling object has just before impact
