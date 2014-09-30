@@ -70,7 +70,7 @@ def Interface():
                     if he == 'menu':
                         pass
                     else:
-                        ni = itemMaker(na,ma,he)
+                        ni = itemMaker(na,float(ma),float(he))
                         items.append(ni)
                         changed = True
                         print ""

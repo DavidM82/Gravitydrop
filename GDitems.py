@@ -51,6 +51,6 @@ for i in eachword:
         a = eachword[pointer+1]
         b = eachword[pointer+2]
         c = eachword[pointer+3]
-        new = itemMaker(a,b,c)
+        new = itemMaker( a, float(b), float(c))
         items.append(new)
     pointer = pointer + 1
